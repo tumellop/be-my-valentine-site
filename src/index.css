@@ -1,19 +1,14 @@
-/* This ensures the app takes up the full browser window */
 :root {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
 }
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-  background-color: #fff0f3; /* Matching your theme background */
-}
-
-#root {
-  width: 100%;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden; /* Stops scrolling */
+  overscroll-behavior: none; /* Stops the 'bounce' on Mac/iPhone */
 }

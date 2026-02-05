@@ -14,7 +14,7 @@ const NO_PHRASES = [
 export default function App() {
   const [noClicks, setNoClicks] = useState(0);
   const [isValentine, setIsValentine] = useState(false);
-  const yesButtonSize = (noClicks * 40) + 16;
+  const yesButtonSize = (noClicks * 20) + 16;
 
   const gifIndex = noClicks === 0 ? 0 : Math.min(noClicks, 7);
   const currentGif = `/gifs/${gifIndex}.gif`; 
@@ -102,21 +102,23 @@ const styles = {
     flexDirection: "column", 
     alignItems: "center", 
     justifyContent: "center", 
-    height: "100vh", 
+    height: "100dvh",       // <--- CHANGED: "dvh" fits mobile screens perfectly
+    width: "100vw",         
     fontFamily: "Arial, sans-serif", 
     textAlign: "center", 
     backgroundColor: "#fdcece", 
     padding: '20px', 
-    overflow: 'hidden' 
+    boxSizing: 'border-box', 
+    overflow: 'hidden'       
   },
   
   gifContainer: {
-    width: 'min(300px, 90vw)', 
-    height: '350px',
+    width: '300px',
+    height: '290px',        // <--- CHANGED: Reduced from 320px to 200px to remove top space
     display: 'flex',
-    alignItems: 'flex-end', 
+    alignItems: 'flex-end', // Keeps penguins close to text
     justifyContent: 'center', 
-    marginBottom: '10px'
+    marginBottom: '0px'     // Removed margin since the box has enough space
   },
   
   gif: {
@@ -127,69 +129,19 @@ const styles = {
   
   title: { 
     color: "black", 
-    margin: "10px 0",
+    margin: "10px 0",       // Keep this small to keep text close to penguins
     fontSize: "2.5rem", 
     fontWeight: "bold"
   },
   
+  // ... (keep the rest of your button and ticket styles the same) ...
   btnGroup: { display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", flexWrap: "wrap" },
-  yesBtn: { backgroundColor: "#28a745", color: "white", padding: "10px 20px", border: "none", borderRadius: "5px", cursor: "pointer", transition: 'all 0.3s ease' },
-  noBtn: { backgroundColor: "#dc3545", color: "white", padding: "10px 20px", border: "none", borderRadius: "5px", cursor: "pointer" },
-  
-  successText: { 
-    fontSize: "48px", 
-    color: "black", 
-    fontWeight: "bold", 
-    marginTop: "20px",
-  },
-
-  ticket: {
-    backgroundColor: "white",
-    padding: "20px",
-    borderRadius: "15px",
-    marginTop: "20px",
-    boxShadow: "0 4px 15px rgba(0,0,0,0.1)",
-    textAlign: "left",
-    width: "min(300px, 90vw)",
-    border: "2px dashed #ff1493",
-    position: "relative"
-  },
-  
-  ticketTitle: {
-    fontSize: "18px",
-    fontWeight: "bold",
-    color: "#ff1493",
-    marginBottom: "10px",
-    textTransform: "uppercase",
-    borderBottom: "1px solid #ddd",
-    paddingBottom: "5px"
-  },
-  
-  ticketInfo: {
-    fontSize: "16px",
-    color: "#333",
-    margin: "5px 0"
-  },
-
-  calendarBtn: {
-    padding: "10px 20px",
-    backgroundColor: "black",
-    color: "white",
-    border: "none",
-    borderRadius: "20px",
-    cursor: "pointer",
-    fontSize: "14px",
-    fontWeight: "bold"
-  },
-
-  shareBtn: {
-    padding: "10px 20px",
-    backgroundColor: "#25D366", 
-    color: "white",
-    border: "none",
-    borderRadius: "20px",
-    cursor: "pointer",
-    fontSize: "14px",
-    fontWeight: "bold"
-  }
+  yesBtn: { backgroundColor: "#28a745", color: "white", padding: "10px 20px", border: "none", borderRadius: "5px", cursor: "pointer", transition: 'all 0.3s ease', fontWeight: "bold" },
+  noBtn: { backgroundColor: "#dc3545", color: "white", padding: "10px 20px", border: "none", borderRadius: "5px", cursor: "pointer", fontSize: "18px", fontWeight: "bold"},
+  successText: { fontSize: "48px", color: "black", fontWeight: "bold", marginTop: "20px", fontFamily: "'Pacifico', cursive" },
+  ticket: { backgroundColor: "white", padding: "20px", borderRadius: "15px", marginTop: "20px", boxShadow: "0 4px 15px rgba(0,0,0,0.1)", textAlign: "left", width: "min(300px, 90vw)", border: "2px dashed #ff1493", position: "relative" },
+  ticketTitle: { fontSize: "18px", fontWeight: "bold", color: "#ff1493", marginBottom: "10px", textTransform: "uppercase", borderBottom: "1px solid #ddd", paddingBottom: "5px" },
+  ticketInfo: { fontSize: "16px", color: "#333", margin: "5px 0" },
+  calendarBtn: { padding: "10px 20px", backgroundColor: "black", color: "white", border: "none", borderRadius: "20px", cursor: "pointer", fontSize: "14px", fontWeight: "bold" },
+  shareBtn: { padding: "10px 20px", backgroundColor: "#25D366", color: "white", border: "none", borderRadius: "20px", cursor: "pointer", fontSize: "14px", fontWeight: "bold" }
 };
