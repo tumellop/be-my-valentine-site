@@ -2,28 +2,44 @@ import React, { useState } from 'react';
 import confetti from 'canvas-confetti';
 
 const NO_PHRASES = [
-  "No 💔", "Pretty please? 🥺", "But we'd be so cute together! 💕",
-  "One more chance, pookie?", "Don't break my heart :(",
-  "What about a maybe?", "Please don't do this to me, I'm fragile"
+  "No 💔", 
+  "But we'd be so cute together! 💕", 
+  "Pretty please? 🥺", 
+  "Don't break my heart :(", 
+  "What about a maybe?", 
+  "One more chance, pookie?", 
+  "You leave me no choice pooks"
 ];
 
 export default function App() {
   const [noClicks, setNoClicks] = useState(0);
   const [isValentine, setIsValentine] = useState(false);
-  const yesButtonSize = (noClicks * 20) + 16;
+  const yesButtonSize = (noClicks * 40) + 16;
+
+  const gifIndex = noClicks === 0 ? 0 : Math.min(noClicks, 7);
+  const currentGif = `/gifs/${gifIndex}.gif`; 
 
   const handleNo = () => setNoClicks(prev => prev + 1);
   const handleYes = () => {
     setIsValentine(true);
-    confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+    confetti({ particleCount: 150, spread: 70 });
   };
 
   return (
     <div style={styles.container}>
       {!isValentine ? (
         <>
-          <img src="https://media.tenor.com/VIChDQ6ejRQAAAAj/jumping-bear-hearts-no-png.gif" style={{ maxWidth: '80%', height: 'auto' }} alt="Cute bear" />
+          {/* VIDEO/GIF SECTION */}
+          <div style={styles.gifContainer}>
+            <img 
+              src={currentGif} 
+              alt="Valentine GIF" 
+              style={styles.gif} 
+            />
+          </div>
+
           <h1 style={styles.title}>Will you be my Valentine? 💘</h1>
+          
           <div style={styles.btnGroup}>
             <button 
               onClick={handleYes} 
@@ -31,15 +47,49 @@ export default function App() {
             >
               Yes
             </button>
-            <button onClick={handleNo} style={styles.noBtn}>
-              {noClicks === 0 ? "No" : NO_PHRASES[Math.min(noClicks - 1, NO_PHRASES.length - 1)]}
-            </button>
+            
+            {noClicks < NO_PHRASES.length + 1 && (
+              <button onClick={handleNo} style={styles.noBtn}>
+                {noClicks === 0 ? "No" : NO_PHRASES[Math.min(noClicks - 1, NO_PHRASES.length - 1)]}
+              </button>
+            )}
           </div>
         </>
       ) : (
         <>
-          <img src="https://media.tenor.com/f1xnRxTRxLAAAAAj/bears-with-kisses-bg.gif" alt="Bears kissing" />
-          <div style={styles.successText}>Yay!!! 💖🎉</div>
+          {/* SUCCESS SECTION */}
+          <img src="/gifs/success.gif" alt="Success" style={styles.gif} />
+          <div style={styles.successText}>I knew you'd say yes! 🥰</div>
+          
+          {/* TICKET SECTION */}
+          <div style={styles.ticket}>
+            <div style={styles.ticketTitle}>🎟️ Valentine's Ticket</div>
+            <div style={styles.ticketInfo}><strong>Date:</strong> Feb 14, 2026</div>
+            <div style={styles.ticketInfo}><strong>Time:</strong> 7:00 PM</div>
+            <div style={styles.ticketInfo}><strong>Location:</strong> It's a surprise! 🤫</div>
+            <div style={styles.ticketInfo}><strong>Admit:</strong> 1 Cutie</div>
+            
+            <div style={{ marginTop: '20px', display: 'flex', gap: '10px', justifyContent: 'center', flexWrap: 'wrap' }}>
+              {/* CALENDAR BUTTON */}
+              <a 
+                href="data:text/calendar;charset=utf8,BEGIN:VCALENDAR%0AVERSION:2.0%0ABEGIN:VEVENT%0ADTSTART:20260214T190000%0ADTEND:20260214T220000%0ASUMMARY:Valentine's Date%0ALOCATION:Secret Location%0ADESCRIPTION:Date Night!%0AEND:VEVENT%0AEND:VCALENDAR" 
+                download="valentine-date.ics"
+                style={{ textDecoration: 'none' }}
+              >
+                <button style={styles.calendarBtn}>📅 Add to Calendar</button>
+              </a>
+
+              {/* WHATSAPP BUTTON */}
+              <a 
+                href="https://wa.me/?text=I%20said%20YES!%20See%20you%20on%20the%2014th!%20%F0%9F%92%96"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ textDecoration: 'none' }}
+              >
+                <button style={styles.shareBtn}>💌 Send Response</button>
+              </a>
+            </div>
+          </div>
         </>
       )}
     </div>
@@ -52,47 +102,94 @@ const styles = {
     flexDirection: "column", 
     alignItems: "center", 
     justifyContent: "center", 
-    width: "100%",
     height: "100vh", 
     fontFamily: "Arial, sans-serif", 
     textAlign: "center", 
-    backgroundColor: "#fff0f3",
-    padding: "20px",
-    boxSizing: "border-box"
+    backgroundColor: "#fdcece", 
+    padding: '20px', 
+    overflow: 'hidden' 
   },
+  
+  gifContainer: {
+    width: 'min(300px, 90vw)', 
+    height: '350px',
+    display: 'flex',
+    alignItems: 'flex-end', 
+    justifyContent: 'center', 
+    marginBottom: '10px'
+  },
+  
+  gif: {
+    maxWidth: '100%', 
+    maxHeight: '100%',
+    objectFit: 'contain' 
+  },
+  
   title: { 
-    color: "#d63384", 
-    margin: "20px 0",
-    fontSize: "min(8vw, 2rem)" // Scales text based on screen size
+    color: "black", 
+    margin: "10px 0",
+    fontSize: "2.5rem", 
+    fontWeight: "bold"
   },
-  btnGroup: { 
-    display: "flex", 
-    alignItems: "center", 
-    justifyContent: "center", 
-    gap: "10px", 
-    flexWrap: "wrap" // Wraps buttons if they get too big for mobile
-  },
-  yesBtn: { 
-    backgroundColor: "#28a745", 
-    color: "white", 
-    padding: "10px 20px", 
-    border: "none", 
-    borderRadius: "5px", 
-    cursor: "pointer" 
-  },
-  noBtn: { 
-    backgroundColor: "#dc3545", 
-    color: "white", 
-    padding: "10px 20px", 
-    border: "none", 
-    borderRadius: "5px", 
-    cursor: "pointer", 
-    fontSize: "16px" 
-  },
+  
+  btnGroup: { display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", flexWrap: "wrap" },
+  yesBtn: { backgroundColor: "#28a745", color: "white", padding: "10px 20px", border: "none", borderRadius: "5px", cursor: "pointer", transition: 'all 0.3s ease' },
+  noBtn: { backgroundColor: "#dc3545", color: "white", padding: "10px 20px", border: "none", borderRadius: "5px", cursor: "pointer" },
+  
   successText: { 
-    fontSize: "min(12vw, 48px)", // Scales "Yay!" for mobile
-    color: "#ff69b4", 
+    fontSize: "48px", 
+    color: "black", 
     fontWeight: "bold", 
-    marginTop: "20px" 
+    marginTop: "20px",
+  },
+
+  ticket: {
+    backgroundColor: "white",
+    padding: "20px",
+    borderRadius: "15px",
+    marginTop: "20px",
+    boxShadow: "0 4px 15px rgba(0,0,0,0.1)",
+    textAlign: "left",
+    width: "min(300px, 90vw)",
+    border: "2px dashed #ff1493",
+    position: "relative"
+  },
+  
+  ticketTitle: {
+    fontSize: "18px",
+    fontWeight: "bold",
+    color: "#ff1493",
+    marginBottom: "10px",
+    textTransform: "uppercase",
+    borderBottom: "1px solid #ddd",
+    paddingBottom: "5px"
+  },
+  
+  ticketInfo: {
+    fontSize: "16px",
+    color: "#333",
+    margin: "5px 0"
+  },
+
+  calendarBtn: {
+    padding: "10px 20px",
+    backgroundColor: "black",
+    color: "white",
+    border: "none",
+    borderRadius: "20px",
+    cursor: "pointer",
+    fontSize: "14px",
+    fontWeight: "bold"
+  },
+
+  shareBtn: {
+    padding: "10px 20px",
+    backgroundColor: "#25D366", 
+    color: "white",
+    border: "none",
+    borderRadius: "20px",
+    cursor: "pointer",
+    fontSize: "14px",
+    fontWeight: "bold"
   }
 };
