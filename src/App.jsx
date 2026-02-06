@@ -20,6 +20,14 @@ export default function App() {
   const gifIndex = noClicks === 0 ? 0 : Math.min(noClicks, 7);
   const currentGif = `/gifs/${gifIndex}.gif`; 
 
+  useEffect(() => {
+      const imagesToPreload =["/gifs/0.gif", "/gifs/1.gif", "/gifs/2.gif", "/gifs/3.gif", "/gifs/4.gif", "/gifs/5.gif", "/gifs/6.gif", "/gifs/7.gif", "/gifs/success.gif"];
+      imagesToPreload.forEach((image) => {
+          const newImage = new Image();
+          newImage.src = image;
+      });
+  }, []);
+
   const handleNo = () => setNoClicks(prev => prev + 1);
   const handleYes = () => {
     setIsValentine(true);
