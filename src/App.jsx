@@ -68,7 +68,7 @@ export default function App() {
         <>
           {/* SUCCESS SECTION */}
           <img src="/gifs/success.gif" alt="Success" style={styles.gif} />
-          <div style={styles.successText}>I knew you'd say yes! 🥰</div>
+          <div style={styles.successText}>I knew you'd say yes!🥰</div>
           
           {/* TICKET SECTION */}
           <div style={styles.ticket}>
@@ -147,7 +147,7 @@ const styles = {
   btnGroup: { display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", flexWrap: "wrap" },
   yesBtn: { backgroundColor: "#28a745", color: "white", padding: "10px 20px", border: "none", borderRadius: "5px", cursor: "pointer", transition: 'all 0.3s ease', fontWeight: "bold" },
   noBtn: { backgroundColor: "#dc3545", color: "white", padding: "10px 20px", border: "none", borderRadius: "5px", cursor: "pointer", fontSize: "18px", fontWeight: "bold"},
-  successText: { fontSize: "48px", color: "black", fontWeight: "bold", marginTop: "20px", fontFamily: "'Pacifico', cursive" },
+  successText: { fontSize: "48px", color: "black", fontWeight: "bold", marginTop: "20px"},
   ticket: { backgroundColor: "white", padding: "20px", borderRadius: "15px", marginTop: "20px", boxShadow: "0 4px 15px rgba(0,0,0,0.1)", textAlign: "left", width: "min(300px, 90vw)", border: "2px dashed #ff1493", position: "relative" },
   ticketTitle: { fontSize: "18px", fontWeight: "bold", color: "#ff1493", marginBottom: "10px", textTransform: "uppercase", borderBottom: "1px solid #ddd", paddingBottom: "5px" },
   ticketInfo: { fontSize: "16px", color: "#333", margin: "5px 0" },
