@@ -1,11 +1,12 @@
+import React, { useState, useEffect } from 'react';
 import React, { useState } from 'react';
 import confetti from 'canvas-confetti';
 
 const NO_PHRASES = [
-  "No 💔", 
-  "But we'd be so cute together! 💕", 
-  "Pretty please? 🥺", 
-  "Don't break my heart :(", 
+  "No, in this economy? 💔", 
+  "Ops, wrong button💕", 
+  "Are you sure?🥺", 
+  "Please,I'm begging you", 
   "What about a maybe?", 
   "One more chance, pookie?", 
   "You leave me no choice pooks"
