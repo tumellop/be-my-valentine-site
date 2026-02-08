@@ -3,7 +3,7 @@ import confetti from 'canvas-confetti';
 
 const NO_PHRASES = [
   "No, in this economy? 💔", 
-  "Ops, wrong button💕", 
+  "Don't make me cry", 
   "Are you sure?🥺", 
   "Please,I'm begging you", 
   "What about a maybe?", 
